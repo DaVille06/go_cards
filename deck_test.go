@@ -1,6 +1,9 @@
 package main
 
-import "testing"
+import (
+	"os"
+	"testing"
+)
 
 // run package means run all tests that are defined to this package
 // run file tests means run all tests in this file
@@ -21,4 +24,18 @@ func TestNewDeck(t *testing.T) {
 	if d[len(d) - 1] != "Four of Clubs" {
 		t.Errorf("Expected last card of Four of Clubs, but got %v", d[len(d) - 1])
 	}
+}
+
+func TestSaveToDeckAndNewDeckTestFromFile(t *testing.T) {
+	os.Remove("_decktesting")
+
+	d := newDeck()
+	d.saveToFile("_decktesting")
+	loadedDeck := newDeckFromFile("_decktesting")
+
+	if len(loadedDeck) != 16 {
+		t.Errorf("Expected 16 cards in deck, but got %d", len(d))
+	}
+
+	os.Remove("_decktesting")
 }
