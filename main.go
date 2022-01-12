@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func main() {
 	// long form method
 	// could have omitted the string
@@ -21,7 +23,17 @@ func main() {
 	// iterate over a slice
 	// can call this because cards is of type deck
 	// cards.print()
-	cards := newDeckFromFile("my_cards")
+
+	cards := newDeck()
 	cards.shuffle()
+	newHand, cards := deal(cards, 1)
+
+
+
+	fmt.Println("Dealt Hand:")
+	newHand.print()
+	fmt.Println("Remaining Deck:")
+	//oldDeck.print()
+	fmt.Println("Original Deck:")
 	cards.print()
 }
